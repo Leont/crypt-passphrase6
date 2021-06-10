@@ -1,0 +1,30 @@
+#!perl
+
+use Test;
+
+use Crypt::Argon2;
+use Crypt::Passphrase::Argon2;
+
+my $passphrase = Crypt::Passphrase::Argon2.new(
+	memory-cost => '16M',
+	time-cost   => 2,
+	parallelism => 1,
+	output-size => 16,
+	salt-size   => 16,
+);
+
+my $password = 'password';
+my $salt = "\0" x 16;
+
+my $hash1 = $passphrase.hash-password($password);
+ok($passphrase.verify-password($password, $hash1), 'Self-generated password validates');
+ok(!$passphrase.needs-rehash($hash1), 'Self-generated password doesn\'t need to be regenerated');
+
+my $hash2 = argon2-hash($password, :2t_cost, :m_cost(16 * 1024), :1parallelism, :16hashlen);
+ok($passphrase.verify-password($password, $hash2));
+ok(!$passphrase.needs-rehash($hash2));
+
+my $hash3 = argon2-hash($password, :2t_cost, :m_cost(8 * 1024), :1parallelism, :16hashlen);
+ok($passphrase.verify-password($password, $hash3));
+
+done-testing;
