@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/Leont/crypt-passphrase6/workflows/test/badge.svg)](https://github.com/Leont/crypt-passphrase6/actions)
+
 NAME
 ====
 

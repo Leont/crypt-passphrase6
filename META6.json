@@ -19,7 +19,7 @@
     "Crypt::Passphrase::Validator" : "lib/Crypt/Passphrase/Validator.rakumod"
   },
   "resources" : [ ],
-  "source-url" : "",
+  "source-url" : "https://github.com/Leont/crypt-passphrase6.git",
   "tags" : [ ],
   "test-depends" : [ ],
   "version" : "0.0.1"
